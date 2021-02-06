@@ -8,7 +8,7 @@ class Particle {
 	}
 
 	show() {
-		fill(255);
+		fill(255, 231, 0);
 		ellipse(this.pos.x, this.pos.y, 8);
 		for (let ray of this.rays) {
 			ray.show();
@@ -20,6 +20,7 @@ class Particle {
 	}
 
 	look(walls) {
+		stroke(255, 231, 0);
 		for (let ray of this.rays) {
 			let clos = null;
 			let rec = Infinity;

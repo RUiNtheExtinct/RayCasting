@@ -5,7 +5,7 @@ class Ray {
 	}
 
 	show() {
-		stroke(255);
+		stroke(255, 231, 0);
 		push();
 		translate(this.pos.x, this.pos.y);
 		line(0, 0, this.dir.x * 50, this.dir.y * 50);
