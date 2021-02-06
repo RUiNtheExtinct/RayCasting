@@ -1,7 +1,9 @@
 let walls = [];
 let ray;
 let particle;
-let b = true;
+let b = true,
+	c = false;
+let button;
 let x1, y1;
 function setup() {
 	createCanvas(windowWidth, windowHeight);
@@ -16,14 +18,21 @@ function setup() {
 	walls.push(new Boundary(0, 0, 0, height));
 	walls.push(new Boundary(width, height, 0, height));
 	walls.push(new Boundary(width, height, width, 0));
-	particle = new Particle();
+	button = createButton("click me");
+	button.position(19, 19);
+	button.mousePressed(start_ray);
 	// ray = new Ray(50, 150);
+}
+
+function start_ray() {
+	c = ~c;
+	particle = new Particle();
 }
 
 function draw() {
 	background(0);
 	stroke(255);
-	if (mouseIsPressed && b) {
+	if (mouseIsPressed && b && !c) {
 		x1 = mouseX;
 		y1 = mouseY;
 		b = false;
@@ -31,7 +40,7 @@ function draw() {
 	const x2 = mouseX;
 	const y2 = mouseY;
 	//line(x1,y1,x2,y2);
-	if (!mouseIsPressed && !b) {
+	if (!mouseIsPressed && !b && !c) {
 		b = true;
 		walls.push(new Boundary(x1, y1, x2, y2));
 		line(x1, y1, x2, y2);
@@ -39,6 +48,8 @@ function draw() {
 	for (let wall of walls) {
 		wall.show();
 	}
-	particle.look(walls);
-	particle.update(mouseX, mouseY);
+	if (c) {
+		particle.look(walls);
+		particle.update(mouseX, mouseY);
+	}
 }
