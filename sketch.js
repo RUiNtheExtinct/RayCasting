@@ -3,32 +3,32 @@ let ray;
 let particle;
 let b = true,
 	c = false,
-	d = false;
-let button1, button2, button3;
+	d = false,
+	reflect_flag = false;
+let b1, b2, b3, b4;
 let x1, y1;
 function setup() {
 	createCanvas(windowWidth, windowHeight);
-	// for (let i = 0; i < random(15); i++) {
-	// 	let x1 = random(width);
-	// 	let y1 = random(height);
-	// 	let x2 = random(width);
-	// 	let y2 = random(height);
-	// 	walls[i] = new Boundary(x1, y1, x2, y2);
-	// }
 	walls.push(new Boundary(0, 0, width, 0));
 	walls.push(new Boundary(0, 0, 0, height));
 	walls.push(new Boundary(width, height, 0, height));
 	walls.push(new Boundary(width, height, width, 0));
-	button1 = createButton("Start Casting");
-	button2 = createButton("Heavy Mode");
-	button3 = createButton("Reset");
-	button1.position(19, 19);
-	button2.position(1200, 550);
-	button3.position(19, 550);
-	button1.mousePressed(start_ray);
-	button2.mousePressed(start_heavy);
-	button3.mousePressed(reset);
-	// ray = new Ray(50, 150);
+	b1 = createButton("Start Casting");
+	b2 = createButton("Heavy Mode");
+	b3 = createButton("Reset");
+	b4 = createButton("Reflect\n  (Beta)");
+	b1.position(19, 19);
+	b2.position(1200, 550);
+	b3.position(19, 550);
+	b4.position(1200, 19);
+	b1.mousePressed(start_ray);
+	b2.mousePressed(start_heavy);
+	b3.mousePressed(reset);
+	b4.mousePressed(reflect);
+}
+
+function reflect() {
+	reflect_flag = ~reflect_flag;
 }
 
 function start_heavy() {
@@ -41,7 +41,7 @@ function start_heavy() {
 
 function start_ray() {
 	c = ~c;
-	d = ~d;
+	d = false;
 	particle = new Particle();
 }
 
@@ -49,6 +49,7 @@ function reset() {
 	createCanvas(windowWidth, windowHeight);
 	//b = true;
 	c = false;
+	reflect_flag = false;
 	//d = false;
 	walls = [];
 	walls.push(new Boundary(0, 0, width, 0));
@@ -75,15 +76,17 @@ function draw() {
 	}
 	if (mouseIsPressed && d) {
 		const x1 = mouseX,
-			y1 = mouseY;
-		walls.push(new Boundary(x1, y1, pmouseX, pmouseY));
-		line((x1, y1, pmouseX, pmouseY));
+			y1 = mouseY,
+			x2 = pmouseX,
+			y2 = pmouseY;
+		walls.push(new Boundary(x1, y1, x2, y2));
+		line((x1, y1, x2, y2));
 	}
 	for (let wall of walls) {
 		wall.show();
 	}
 	if (c) {
-		particle.look(walls);
+		particle.look(walls, reflect_flag);
 		particle.update(mouseX, mouseY);
 	}
 }
