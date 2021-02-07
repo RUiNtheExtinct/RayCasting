@@ -16,15 +16,15 @@ function setup() {
 	b1 = createButton("Start Casting");
 	b2 = createButton("Heavy Mode");
 	b3 = createButton("Reset");
-	b4 = createButton("Reflect\n  (Beta)");
+	//b4 = createButton("Reflect\n  (Beta)");
 	b1.position(19, 19);
 	b2.position(1200, 550);
 	b3.position(19, 550);
-	b4.position(1200, 19);
+	//b4.position(1200, 19);
 	b1.mousePressed(start_ray);
 	b2.mousePressed(start_heavy);
 	b3.mousePressed(reset);
-	b4.mousePressed(reflect);
+	//b4.mousePressed(reflect);
 }
 
 function reflect() {
