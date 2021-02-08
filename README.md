@@ -1,3 +1,3 @@
 # RAYCASTING
 - A basic javascript implementation of dynamic raycasting.
-![](/home/ruin/Videos/RayCasting.gif)
+![](https://media.giphy.com/media/amoTKV7qZuBB0TmEK2/giphy.gif)
