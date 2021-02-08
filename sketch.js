@@ -18,8 +18,8 @@ function setup() {
 	b3 = createButton("Reset");
 	//b4 = createButton("Reflect\n  (Beta)");
 	b1.position(19, 19);
-	b2.position(1200, 550);
-	b3.position(19, 550);
+	b2.position(windowWidth - 130, windowHeight - 50);
+	b3.position(19, windowHeight - 50);
 	//b4.position(1200, 19);
 	b1.mousePressed(start_ray);
 	b2.mousePressed(start_heavy);
